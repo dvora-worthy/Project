@@ -1,19 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
+import {config} from 'dotenv-flow'
 
 import healthcheckRouteRoute from './routes/healthcheck.route';
 import creditCardRoute from './routes/creditCard.routes';
 
-import config from './config';
-import { NextFunction, Request, Response } from 'express-serve-static-core';
-import logger from './util/logger';
-import {CreditCardController} from "./controllers/creditCard.controller";
-
 // Create Express server
 const app = express();
-app.set('config', config);
-
+config()
 
 // Express configuration
 app.use(helmet());

@@ -1,7 +1,6 @@
 import { Logger, LoggerOptions, transports } from 'winston';
-import config from '../config';
 
-const logLevel = config.logLevel;
+const logLevel = process.env.LOG_LEVEL;
 
 const options: LoggerOptions = {
     transports: [

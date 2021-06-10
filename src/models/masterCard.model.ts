@@ -3,7 +3,7 @@ import { IMasterCardReq, IMasterCardErrorRes } from "../constants/types";
 
 
 export class MasterCardModel extends CreditCardCompany {
-    url: string = 'https://interview.riskxint.com/mastercard/capture_card'
+    url: string = process.env.MASTER_CARD_CHARGE_URL
     errorMsgField: string = 'decline_reason'
 
     // @ts-ignore

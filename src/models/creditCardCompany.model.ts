@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import { failedReqMaxRetries, businessErrors } from "../constants";
+import { businessErrors } from "../constants";
 import { IChargeRequest, ICreditCardReqFields, ISuccessResponse, IErrorResponse } from '../constants/types'
 
 
@@ -25,34 +25,34 @@ export abstract class CreditCardCompany {
 
     private requestWithRetry(requestBody: IChargeRequest){
         return new Promise((resolve, reject) => {
-            let attempts = 1;
+            let attempts = 1
             const fields = this.getRequestFields(requestBody)
 
             const delay = (n: number) => {
                 setTimeout(() => {
-                    attempts++;
+                    attempts++
 
-                    retry(n - 1);
-                }, Math.pow(attempts, 2) * 1000);
+                    retry(n - 1)
+                }, Math.pow(attempts, 2) * 1000)
             }
 
             const retry = async (i: number) => {
-                return await axios.post(this.url, fields, {headers: {identifier: 'Dvora'}})
+                return await axios.post(this.url, fields, {headers: {identifier: process.env.REQUEST_IDENTIFIER}})
                     .then(res => {
-                        const status = res.status;
+                        const status = res.status
 
                         if(status === 200) {
-                            return resolve(res);
+                            return resolve(res)
                         }
                         else if (i === 1) {
-                            reject('attempts ended');
+                            reject('attempts ended')
                         }
                         else {  delay(i)  }
                 }).catch((error) => {
                     const errMsg = error.response.data[this.errorMsgField]
 
                     if(businessErrors.includes(errMsg)) {
-                        resolve({ error: errMsg })
+                        resolve()
                     }
                     if (i === 1) {
                         reject(error)
@@ -60,7 +60,7 @@ export abstract class CreditCardCompany {
                     else { delay(i) }
                 })
             }
-            return retry(failedReqMaxRetries);
+            return retry(parseInt(process.env.MAX_RETRIES))
         })
     }
 }

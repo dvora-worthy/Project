@@ -2,7 +2,7 @@ import { CreditCardCompany } from "./creditCardCompany.model";
 import { IVisaReq, IVisaRes } from '../constants/types'
 
 export class VisaModel extends CreditCardCompany {
-    url: string = 'https://interview.riskxint.com/visa/api/chargeCard'
+    url: string = process.env.VISA_CHARGE_UTL
     errorMsgField: string = 'resultReason'
 
 

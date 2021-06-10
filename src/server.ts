@@ -1,13 +1,12 @@
 import app from './app';
 import logger from './util/logger';
 
-const config = app.get('config');
-
+const port = process.env.PORT || 8000
 /**
  * Start Express server.
  */
 
-const server = app.listen(config.port, () => logger.info(`app is listening on port ${config.port}`));
+const server = app.listen(port, () => logger.info(`app is listening on port ${port}`));
 
 
 export default server;

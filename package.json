@@ -12,13 +12,14 @@
     "start": "npm run serve",
     "serve": "ts-node src/server.ts",
     "watch-node": "nodemon",
-    "test":  "tslint tsconfig.json --fix"
+    "linter-fix": "tslint tsconfig.json --fix"
   },
   "dependencies": {
     "async": "^3.0.1",
     "axios": "^0.21.1",
     "bluebird": "^3.5.5",
     "body-parser": "^1.19.0",
+    "dotenv-flow": "^3.2.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "express-validator": "^6.0.1",
@@ -45,6 +46,7 @@
     "eslint": "^6.2.2",
     "nodemon": "^1.19.1",
     "ts-node": "^8.3.0",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.2",
+    "@types/dotenv-flow": "^3.1.0"
   }
 }
